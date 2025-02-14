@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProjectRequest;
 use App\Models\Project;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,10 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        //
+        // get all projects from project model
+        $projects = Project::all();
+        // return to index in project view
+        return view('projects.index', compact('projects')); 
     }
 
     /**
@@ -28,7 +32,12 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+         // take validated data from projectrequest
+         $request->validated();
+         // store to database
+         Project::create($request->all());
+         // return back to view
+         return redirect()->back();
     }
 
     /**
@@ -50,16 +59,29 @@ class ProjectController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Project $project)
+    public function update(ProjectRequest $request, Project $project)
     {
-        //
+        // create new object of project
+        $project = new Project();
+        // fill project variable with validated data from projectrequest
+        $project->fill($request->validated());
+        // save data to database
+        $project->save();
+        // return back to view
+        return redirect()->back();
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Project $project)
+    public function destroy(ProjectRequest $request, Project $project)
     {
-        //
+                // create new object of project
+                $project = new Project();
+                // fill project variable with validated data from projectrequest
+                $project->fill($request->validated());
+                // destroy/deleting from database
+                $project->delete();
     }
 }
+    
