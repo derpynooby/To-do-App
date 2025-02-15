@@ -29,7 +29,7 @@ class Project extends Model
      * Set of guarded fields
      * @var array
      */
-    protected $guarded = [$id];
+    protected $guarded = ['id'];
 
 
     /**

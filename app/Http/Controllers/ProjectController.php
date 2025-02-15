@@ -16,7 +16,7 @@ class ProjectController extends Controller
         // get all projects from project model
         $projects = Project::all();
         // return to index in project view
-        return view('projects.index', compact('projects')); 
+        return view('pages.project.index', compact('projects')); 
     }
 
     /**
@@ -30,7 +30,7 @@ class ProjectController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ProjectRequest $request)
     {
          // take validated data from projectrequest
          $request->validated();
@@ -61,8 +61,6 @@ class ProjectController extends Controller
      */
     public function update(ProjectRequest $request, Project $project)
     {
-        // create new object of project
-        $project = new Project();
         // fill project variable with validated data from projectrequest
         $project->fill($request->validated());
         // save data to database
@@ -74,14 +72,17 @@ class ProjectController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ProjectRequest $request, Project $project)
+    public function destroy(Request $request, Project $project)
     {
-                // create new object of project
-                $project = new Project();
-                // fill project variable with validated data from projectrequest
-                $project->fill($request->validated());
-                // destroy/deleting from database
-                $project->delete();
+        // fill project variable with request
+        $project->fill([$request]);
+        // destroy/deleting from database
+        $project->delete();
+        // return back to view
+        return redirect()->back();
     }
+
+    /**
+     * Changing project status when all task completed
+     */
 }
-    

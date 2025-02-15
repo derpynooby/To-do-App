@@ -16,7 +16,7 @@ class TaskController extends Controller
         // get all tasks from task model
         $tasks = Task::all();
         // return to index in task view
-        return view('tasks.index', compact('tasks')); 
+        return view('pages.task.index', compact('tasks')); 
     }
 
     /**
@@ -63,8 +63,6 @@ class TaskController extends Controller
      */
     public function update(TaskRequest $request, Task $task)
     {
-        // create new object of task
-        $task = new Task();
         // fill task variable with validated data from taskrequest
         $task->fill($request->validated());
         // save data to database
@@ -76,13 +74,13 @@ class TaskController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(TaskRequest $request, Task $task)
+    public function destroy(Request $request, Task $task)
     {
-        // create new object of task
-        $task = new Task();
         // fill task variable with validated data from taskrequest
         $task->fill($request->validated());
         // destroy/deleting from database
         $task->delete();
+        // return back to view
+        return redirect()->back();
     }
 }
