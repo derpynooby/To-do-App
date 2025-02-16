@@ -35,9 +35,9 @@ class TaskController extends Controller
         // take validated data from taskrequest
         $request->validated();
         // check if data has project_id (if exist merge project_id with value of 0)
-        $data = $request->exist('project_id')? : $request->merge(['project_id' => 0]);
+        $request->exists('project_id')? : $request->merge(['project_id' => 0]);
         // store to database
-        Task::create($data->all());
+        Task::create($request->all());
         // return back to view
         return redirect()->back();
     }
@@ -77,7 +77,7 @@ class TaskController extends Controller
     public function destroy(Request $request, Task $task)
     {
         // fill task variable with validated data from taskrequest
-        $task->fill($request->validated());
+        $task->fill([$request]);
         // destroy/deleting from database
         $task->delete();
         // return back to view

@@ -82,7 +82,4 @@ class ProjectController extends Controller
         return redirect()->back();
     }
 
-    /**
-     * Changing project status when all task completed
-     */
 }
