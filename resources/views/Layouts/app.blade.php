@@ -4,14 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{{ asset('bootstrap/dist/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('bootstrap-icons/font/bootstrap-icons.css') }}">
     <title>{{ config('app.name') }}</title>
 </head>
 <body>
     {{-- Header --}}
-    @yield('header')
+    @include('layouts.header')
     {{-- Content --}}
-    @yield('content')
+    <main>
+        <div class="container">
+            {{-- Navigation --}}
+            <x-navbar></x-navbar>
+            @yield('content')
+        </div>
+    </main>
     {{-- Footer --}}
-    @yield('footer')
+    @include('layouts.footer')
 </body>
+<script src="{{ asset('bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
 </html>

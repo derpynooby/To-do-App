@@ -1,3 +1,6 @@
-<div>
-    <!-- It is not the man who has too little, but the man who craves more, that is poor. - Seneca -->
-</div>
+ {{-- Header --}}
+ <header>
+    <div class="title pt-5 ps-5">
+        <h1 class="fw-bold font-monospace">To-do App</h1>
+    </div>
+</header>
